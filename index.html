@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f172a" />
+    <title>Memoria Fuerte</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- LOGIN -->
+      <section id="login-view" class="view centered" hidden>
+        <h1>🔐 Memoria Fuerte</h1>
+        <p class="subtitle">Encuentra todas las parejas antes de quedarte sin intentos.</p>
+        <button id="btn-login" class="btn primary">Iniciar sesión con Google</button>
+        <p id="login-error" class="error" role="alert"></p>
+      </section>
+
+      <!-- APP -->
+      <div id="app-view" hidden>
+        <header class="topbar">
+          <strong>🔐 Memoria Fuerte</strong>
+          <nav>
+            <button class="btn tab active" data-view="start">Jugar</button>
+            <button class="btn tab" data-view="history">Historial</button>
+          </nav>
+          <div class="user">
+            <span id="user-email"></span>
+            <button id="btn-logout" class="btn small">Salir</button>
+          </div>
+        </header>
+
+        <main>
+          <!-- INICIO + INSTRUCCIONES -->
+          <section id="start" class="view centered">
+            <h2>¡Hola, <span id="user-name"></span>!</h2>
+            <div class="card">
+              <h3>Instrucciones</h3>
+              <ul>
+                <li>Hay 16 cartas boca abajo con 8 parejas de dibujos.</li>
+                <li>Toca dos cartas por turno: si son iguales, se quedan descubiertas.</li>
+                <li>Si no coinciden, cuentan como un fallo y se vuelven a tapar.</li>
+                <li>Ganas si encuentras las 8 parejas con <strong>10 fallos o menos</strong>.</li>
+                <li>Pierdes si llegas a 11 fallos.</li>
+                <li>Puntuación: cuanto menos tiempo y menos fallos, más puntos.</li>
+              </ul>
+            </div>
+            <button id="btn-start" class="btn primary big">Nueva partida</button>
+          </section>
+
+          <!-- JUEGO -->
+          <section id="game" class="view" hidden>
+            <div class="hud">
+              <div>⏱ <span id="hud-time">0</span> s</div>
+              <div>❌ Fallos: <span id="hud-fails">0</span>/<span id="max-fails">10</span></div>
+              <div>✅ Parejas: <span id="hud-pairs">0</span>/8</div>
+            </div>
+            <div id="board" class="board" aria-label="Tablero de cartas"></div>
+            <button id="btn-abandon" class="btn small">Abandonar</button>
+          </section>
+
+          <!-- RESULTADO -->
+          <section id="result" class="view centered" hidden>
+            <h2 id="result-title"></h2>
+            <div class="card">
+              <p>Puntuación: <strong id="result-score"></strong></p>
+              <p>Duración: <strong id="result-time"></strong> s</p>
+              <p>Fallos: <strong id="result-fails"></strong></p>
+              <p id="save-status" class="muted"></p>
+            </div>
+            <div class="row">
+              <button id="btn-again" class="btn primary">Jugar otra vez</button>
+              <button id="btn-to-history" class="btn">Ver historial</button>
+            </div>
+          </section>
+
+          <!-- HISTORIAL -->
+          <section id="history" class="view" hidden>
+            <h2>Mi historial</h2>
+            <p>Total de partidas jugadas: <strong id="history-total">0</strong></p>
+            <p id="history-error" class="error" role="alert"></p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Fecha</th><th>Resultado</th><th>Puntos</th><th>Duración</th></tr>
+                </thead>
+                <tbody id="history-body"></tbody>
+              </table>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
